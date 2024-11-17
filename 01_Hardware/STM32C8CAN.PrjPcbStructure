@@ -1,0 +1,5 @@
+Record=TopLevelDocument|FileName=00_McuComBrd.SchDoc|SheetNumber=1
+Record=SheetSymbol|SourceDocument=00_McuComBrd.SchDoc|Designator=COM|SchDesignator=COM|FileName=02_COM.SchDoc|SheetNumber=3|SymbolType=Normal|RawFileName=02_COM.SchDoc|DesignItemId= |SourceLibraryName= |ObjectKind=Sheet Symbol|RevisionGUID= |ItemGUID= |VaultGUID= 
+Record=SheetSymbol|SourceDocument=00_McuComBrd.SchDoc|Designator=LED|SchDesignator=LED|FileName=04_LED.SchDoc|SheetNumber=5|SymbolType=Normal|RawFileName=04_LED.SchDoc|DesignItemId= |SourceLibraryName= |ObjectKind=Sheet Symbol|RevisionGUID= |ItemGUID= |VaultGUID= 
+Record=SheetSymbol|SourceDocument=00_McuComBrd.SchDoc|Designator=MCU|SchDesignator=MCU|FileName=01_MCU.SchDoc|SheetNumber=2|SymbolType=Normal|RawFileName=01_MCU.SchDoc|DesignItemId= |SourceLibraryName= |ObjectKind=Sheet Symbol|RevisionGUID= |ItemGUID= |VaultGUID= 
+Record=SheetSymbol|SourceDocument=00_McuComBrd.SchDoc|Designator=PWR|SchDesignator=PWR|FileName=03_PWR.SchDoc|SheetNumber=4|SymbolType=Normal|RawFileName=03_PWR.SchDoc|DesignItemId= |SourceLibraryName= |ObjectKind=Sheet Symbol|RevisionGUID= |ItemGUID= |VaultGUID= 
