@@ -1,0 +1,22 @@
+# dot files
+/.vscode/launch.json
+/.settings
+/.eide/log
+/.eide.usr.ctx.json
+
+# project out
+/build
+/bin
+/obj
+/out
+
+# eide template
+*.ept
+*.eide-template
+
+# STM32 Cube Out
+/Drivers
+startup_stm32f103xb.s
+STM32F103C8Tx_FLASH.ld
+Makefile
+.mxproject
