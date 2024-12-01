@@ -1,1 +1,6 @@
-{}
+{
+    "files.associations": {
+        "main.h": "c",
+        "tim.h": "c"
+    }
+}

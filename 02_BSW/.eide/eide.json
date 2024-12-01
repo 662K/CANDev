@@ -2,7 +2,9 @@
   "name": "BSW",
   "type": "ARM",
   "dependenceList": [],
-  "srcDirs": [],
+  "srcDirs": [
+    "../00_Reference"
+  ],
   "virtualFolder": {
     "name": "<virtual_root>",
     "files": [],
@@ -44,6 +46,9 @@
                   },
                   {
                     "path": "Core/Src/stm32f1xx_hal_msp.c"
+                  },
+                  {
+                    "path": "Core/Src/tim.c"
                   }
                 ],
                 "folders": []
@@ -178,12 +183,17 @@
         },
         "options": "null"
       },
-      "uploader": "OpenOCD",
+      "uploader": "STLink",
       "uploadConfig": {
         "bin": "",
-        "target": "stm32f1x",
-        "interface": "stlink",
-        "baseAddr": "0x08000000"
+        "proType": "SWD",
+        "resetMode": "default",
+        "runAfterProgram": true,
+        "speed": 4000,
+        "address": "0x08000000",
+        "elFile": "None",
+        "optionBytes": ".eide/bsw.st.option.bytes.ini",
+        "otherCmds": ""
       },
       "uploadConfigMap": {
         "JLink": {
@@ -196,18 +206,24 @@
           "proType": 1,
           "speed": 8000,
           "otherCmds": ""
+        },
+        "OpenOCD": {
+          "bin": "",
+          "target": "stm32f1x",
+          "interface": "stlink",
+          "baseAddr": "0x08000000"
         }
       },
       "custom_dep": {
         "name": "default",
         "incList": [
-          "Core/Inc",
           "Drivers/STM32F1xx_HAL_Driver/Inc",
           "Drivers/STM32F1xx_HAL_Driver/Inc/Legacy",
           "Drivers/CMSIS/Device/ST/STM32F1xx/Include",
           "Drivers/CMSIS/Include",
           ".cmsis/include",
-          "MDK-ARM/RTE/_BSW"
+          "MDK-ARM/RTE/_BSW",
+          "Core/Inc"
         ],
         "libList": [],
         "defineList": [
