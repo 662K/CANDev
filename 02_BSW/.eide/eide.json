@@ -3,7 +3,8 @@
   "type": "ARM",
   "dependenceList": [],
   "srcDirs": [
-    "../00_Reference"
+    "../00_Reference",
+    "User/Src"
   ],
   "virtualFolder": {
     "name": "<virtual_root>",
@@ -113,16 +114,13 @@
                 "path": "Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_exti.c"
               },
               {
-                "path": "Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.c"
-              },
-              {
-                "path": "Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim_ex.c"
-              },
-              {
                 "path": "Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_usart.c"
               },
               {
                 "path": "Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_dma.c"
+              },
+              {
+                "path": "Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_tim.c"
               }
             ],
             "folders": []
@@ -148,7 +146,11 @@
   },
   "targets": {
     "BSW": {
-      "excludeList": [],
+      "excludeList": [
+        "User/Inc",
+        "<virtual_root>/Drivers/STM32F1xx_HAL_Driver/stm32f1xx_hal_tim_ex.c",
+        "<virtual_root>/Drivers/STM32F1xx_HAL_Driver/stm32f1xx_hal_tim.c"
+      ],
       "toolchain": "AC6",
       "compileConfig": {
         "cpuType": "Cortex-M3",
@@ -223,12 +225,12 @@
           "Drivers/CMSIS/Include",
           ".cmsis/include",
           "MDK-ARM/RTE/_BSW",
-          "Core/Inc"
+          "Core/Inc",
+          "User/Inc"
         ],
         "libList": [],
         "defineList": [
           "USE_FULL_LL_DRIVER",
-          "USE_HAL_DRIVER",
           "STM32F103xB"
         ]
       },
