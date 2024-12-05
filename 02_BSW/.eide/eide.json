@@ -149,7 +149,8 @@
       "excludeList": [
         "User/Inc",
         "<virtual_root>/Drivers/STM32F1xx_HAL_Driver/stm32f1xx_hal_tim_ex.c",
-        "<virtual_root>/Drivers/STM32F1xx_HAL_Driver/stm32f1xx_hal_tim.c"
+        "<virtual_root>/Drivers/STM32F1xx_HAL_Driver/stm32f1xx_hal_tim.c",
+        "../00_Reference/CAN"
       ],
       "toolchain": "AC6",
       "compileConfig": {
@@ -231,7 +232,8 @@
         "libList": [],
         "defineList": [
           "USE_FULL_LL_DRIVER",
-          "STM32F103xB"
+          "STM32F103xB",
+          "USE_HAL_DRIVER"
         ]
       },
       "builderOptions": {
