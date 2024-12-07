@@ -1,4 +1,6 @@
 #include "Timer.h"
+#include "HSI.h"
+#include "can.h"
 
 void Bsw_Task_1ms(void){
   static uint16_t Bsw_TIM_uCnt1s = 0U;
@@ -25,6 +27,8 @@ void Bsw_Task_1ms(void){
 
 void Bsw_Task_10ms(void){
   static uint8_t LED_State = 0U;
+  uint8_t        TxData[8];
+  uint32_t       TxMailbox;
   if (LED_State){
     LED_State = 0U;
     LL_GPIO_ResetOutputPin(GPIOB, LL_GPIO_PIN_10);
@@ -32,6 +36,15 @@ void Bsw_Task_10ms(void){
   else{
     LED_State = 1U;
     LL_GPIO_SetOutputPin(GPIOB, LL_GPIO_PIN_10);
+  }
+
+  TxData[0] = 0x57;
+  TxData[1] = 0xAD;
+
+  if (HAL_CAN_AddTxMessage(&hcan, &TxHeader, TxData, &TxMailbox) != HAL_OK)
+  {
+    /* Transmission request Error */
+    Error_Handler();
   }
 }
 

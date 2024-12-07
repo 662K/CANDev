@@ -2,6 +2,7 @@
     "files.associations": {
         "main.h": "c",
         "tim.h": "c",
-        "timer.h": "c"
+        "timer.h": "c",
+        "can.h": "c"
     }
 }
