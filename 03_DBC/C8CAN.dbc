@@ -42,7 +42,9 @@ BO_ 3221225472 VECTOR__INDEPENDENT_SIG_MSG: 0 Vector__XXX
  SG_ MCU_ModIdx : 0|7@0+ (0.01,0) [0|1.27] "" Vector__XXX
  SG_ MCU_SpdFbk : 0|16@0- (1,0) [-32768|32767] "rpm" Vector__XXX
 
-BO_ 513 MCU_201h: 8 Vector__XXX
+BO_ 513 MCU_201h: 4 MCU
+ SG_ MCU_Task10msLoad : 23|16@0+ (0.01,0) [0|10] "ms" Vector__XXX
+ SG_ MCU_CpuLoad : 7|16@0+ (1,0) [0|65535] "" Vector__XXX
 
 BO_ 512 MCU_200h: 8 MCU
  SG_ MCU_CtrlMode : 59|4@0+ (1,0) [0|15] ""  PC
@@ -69,6 +71,7 @@ BA_DEF_DEF_  "GenMsgCycleTime" 0;
 BA_DEF_DEF_  "GenMsgSendType" "Cycle";
 BA_DEF_DEF_  "MultiplexExtEnabled" "No";
 BA_DEF_DEF_  "BusType" "CAN";
+BA_ "GenMsgCycleTime" BO_ 513 10;
 BA_ "GenMsgCycleTime" BO_ 512 10;
 VAL_ 512 MCU_CtrlMode 7 "Failure" 6 "SpdMode" 5 "TrqMode" 4 "HVStandby" 3 "LVStandby" 2 "Calib" 1 "Init" 0 "Sleep" ;
 

@@ -111,19 +111,12 @@ void msgOutPack_step(void)
         result = result * (1 / 0.01F);
 
         /* round to closest integer value for integer CAN signal */
-        outValue = roundf(result);
+        outValue = (result);
       }
 
       {
         int16_T packedValue;
         int32_T scaledValue;
-        if (outValue > 2147483647.0) {
-          scaledValue = 2147483647;
-        } else if (outValue < -2147483648.0) {
-          scaledValue = -2147483647 - 1;
-        } else {
-          scaledValue = (int32_T) outValue;
-        }
 
         if (scaledValue > (int32_T) (511)) {
           packedValue = 511;
@@ -167,19 +160,12 @@ void msgOutPack_step(void)
         result = result * (1 / 0.01F);
 
         /* round to closest integer value for integer CAN signal */
-        outValue = roundf(result);
+        outValue = result;
       }
 
       {
         int16_T packedValue;
         int32_T scaledValue;
-        if (outValue > 2147483647.0) {
-          scaledValue = 2147483647;
-        } else if (outValue < -2147483648.0) {
-          scaledValue = -2147483647 - 1;
-        } else {
-          scaledValue = (int32_T) outValue;
-        }
 
         if (scaledValue > (int32_T) (511)) {
           packedValue = 511;
@@ -223,19 +209,12 @@ void msgOutPack_step(void)
         result = result * (1 / 0.01F);
 
         /* round to closest integer value for integer CAN signal */
-        outValue = roundf(result);
+        outValue = (result);
       }
 
       {
         int16_T packedValue;
         int32_T scaledValue;
-        if (outValue > 2147483647.0) {
-          scaledValue = 2147483647;
-        } else if (outValue < -2147483648.0) {
-          scaledValue = -2147483647 - 1;
-        } else {
-          scaledValue = (int32_T) outValue;
-        }
 
         if (scaledValue > (int32_T) (511)) {
           packedValue = 511;
@@ -279,19 +258,12 @@ void msgOutPack_step(void)
         result = result * (1 / 0.01F);
 
         /* round to closest integer value for integer CAN signal */
-        outValue = roundf(result);
+        outValue = (result);
       }
 
       {
         int16_T packedValue;
         int32_T scaledValue;
-        if (outValue > 2147483647.0) {
-          scaledValue = 2147483647;
-        } else if (outValue < -2147483648.0) {
-          scaledValue = -2147483647 - 1;
-        } else {
-          scaledValue = (int32_T) outValue;
-        }
 
         if (scaledValue > (int32_T) (511)) {
           packedValue = 511;
@@ -335,19 +307,12 @@ void msgOutPack_step(void)
         result = result * (1 / 0.01F);
 
         /* round to closest integer value for integer CAN signal */
-        outValue = roundf(result);
+        outValue = (result);
       }
 
       {
         int16_T packedValue;
         int32_T scaledValue;
-        if (outValue > 2147483647.0) {
-          scaledValue = 2147483647;
-        } else if (outValue < -2147483648.0) {
-          scaledValue = -2147483647 - 1;
-        } else {
-          scaledValue = (int32_T) outValue;
-        }
 
         if (scaledValue > (int32_T) (511)) {
           packedValue = 511;
@@ -391,7 +356,7 @@ void msgOutPack_step(void)
         result = result * (1 / 0.1F);
 
         /* round to closest integer value for integer CAN signal */
-        outValue = roundf(result);
+        outValue = (result);
       }
 
       {

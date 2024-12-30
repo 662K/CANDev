@@ -94,7 +94,6 @@ int main(void)
   MX_TIM1_Init();
   MX_CAN_Init();
   /* USER CODE BEGIN 2 */
-  msgOutPack_initialize();
   hcan.Instance = CAN1;
 
   CAN_FilterTypeDef  sFilterConfig;
@@ -127,7 +126,7 @@ int main(void)
     Error_Handler();
   }
 
-  msg_MCU_200h_TxHeaderInit();
+  CanStackInit();
   LL_TIM_EnableIT_UPDATE(TIM1);
   LL_TIM_EnableCounter(TIM1);
   /* USER CODE END 2 */
