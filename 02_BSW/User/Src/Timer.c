@@ -1,6 +1,6 @@
 #include "Timer.h"
-#include "HSI.h"
 #include "can.h"
+#include "CanStack.h"
 
 void Bsw_Task_1ms(void){
   static uint16_t Bsw_TIM_uCnt1s = 0U;
@@ -38,14 +38,9 @@ void Bsw_Task_10ms(void){
     LL_GPIO_SetOutputPin(GPIOB, LL_GPIO_PIN_10);
   }
 
-  TxData[0] = 0x57;
-  TxData[1] = 0xAD;
+  msgOutPack_step();
 
-  if (HAL_CAN_AddTxMessage(&hcan, &TxHeader, TxData, &TxMailbox) != HAL_OK)
-  {
-    /* Transmission request Error */
-    Error_Handler();
-  }
+  HAL_CAN_AddTxMessage(&hcan, &msg_MCU_200h_TxHeader, msgOutPack_Y.msgMcu0x200.Data, &TxMailbox);
 }
 
 void Bsw_Task_100ms(void){

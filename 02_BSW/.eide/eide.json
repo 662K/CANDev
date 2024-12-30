@@ -4,7 +4,8 @@
   "dependenceList": [],
   "srcDirs": [
     "../00_Reference",
-    "User/Src"
+    "User/Src",
+    "../03_DBC/CanStack"
   ],
   "virtualFolder": {
     "name": "<virtual_root>",
@@ -227,7 +228,8 @@
           ".cmsis/include",
           "MDK-ARM/RTE/_BSW",
           "Core/Inc",
-          "User/Inc"
+          "User/Inc",
+          "../03_DBC/CanStack"
         ],
         "libList": [],
         "defineList": [

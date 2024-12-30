@@ -25,7 +25,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "HSI.h"
+#include "CanStack.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -56,6 +56,7 @@ void SystemClock_Config(void);
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
+/* Tx message initialization function ----------------------------------------*/
 /* USER CODE BEGIN 0 */
 
 /* USER CODE END 0 */
@@ -93,6 +94,7 @@ int main(void)
   MX_TIM1_Init();
   MX_CAN_Init();
   /* USER CODE BEGIN 2 */
+  msgOutPack_initialize();
   hcan.Instance = CAN1;
 
   CAN_FilterTypeDef  sFilterConfig;
@@ -113,8 +115,6 @@ int main(void)
     Error_Handler();
   }
 
-  
-
   if (HAL_CAN_Start(&hcan) != HAL_OK)
   {
     /* Start Error */
@@ -127,12 +127,7 @@ int main(void)
     Error_Handler();
   }
 
-  TxHeader.StdId = 0x321;
-  TxHeader.ExtId = 0x01;
-  TxHeader.RTR = CAN_RTR_DATA;
-  TxHeader.IDE = CAN_ID_STD;
-  TxHeader.DLC = 2;
-  TxHeader.TransmitGlobalTime = DISABLE;
+  msg_MCU_200h_TxHeaderInit();
   LL_TIM_EnableIT_UPDATE(TIM1);
   LL_TIM_EnableCounter(TIM1);
   /* USER CODE END 2 */
