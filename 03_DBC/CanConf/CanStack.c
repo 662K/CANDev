@@ -44,3 +44,4 @@ void msg_MCU_201h_TxHeaderInit(void){
   msg_MCU_201h_TxHeader.TransmitGlobalTime = DISABLE;
 }
 
+
