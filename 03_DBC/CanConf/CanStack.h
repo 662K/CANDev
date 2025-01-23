@@ -1,6 +1,6 @@
 /* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef CANSTACK_H
-#define CANSTACK_H
+#ifndef _CANSTACK_H
+#define _CANSTACK_H
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f1xx_hal.h"

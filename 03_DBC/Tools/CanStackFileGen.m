@@ -1,17 +1,14 @@
-function CanStackFileGen(MessageInfo)
+function CanStackFileGen(MessageInfo, CgtFolderName, CanCodeFolderName)
   
   CanTxHeaderType = 'CAN_TxHeaderTypeDef';
   TabText = '  ';
 
-  %% CGT File Load
-  CgtFolderName = 'Ccgt';
-  CanCodeFolderName = 'CanConf';
-  
+  %% CGT File Load  
   %CanStack
-  CanStackcCodeFileName = 'CanStack.c';
-  CanStackhCodeFileName = 'CanStack.h';
-  cFilePath = fullfile(CanCodeFolderName, CanStackcCodeFileName);
-  hFilePath = fullfile(CanCodeFolderName, CanStackhCodeFileName);
+  CanStackCcodeFileName = 'CanStack.c';
+  CanStackHcodeFileName = 'CanStack.h';
+  cFilePath = fullfile(CanCodeFolderName, CanStackCcodeFileName);
+  hFilePath = fullfile(CanCodeFolderName, CanStackHcodeFileName);
   
   CanStackcCgtFileName = 'CanStackCgt.c';
   CanStackhCgtFileName = 'CanStackCgt.h';
@@ -30,29 +27,29 @@ function CanStackFileGen(MessageInfo)
   TxHeaderhCgt = fileread(TxHeaderhCgtFilePath);
   %% TxHeader GlobalVar Create
 
-  msgTxHeaderFullcCodeGlobalVar = '';
-  msgTxHeaderFullhCodeGlobalVar = '';
+  msgTxHeaderFullCcodeGlobalVar = '';
+  msgTxHeaderFullHcodeGlobalVar = '';
   
   for i = 1:length(MessageInfo)
     Name = MessageInfo(i).Name;
     msgName = ['msg_' Name];
     TxHeaderName = [msgName '_TxHeader'];
   
-    % cCode
-    msgTxHeadercCodeGlobalVar = [CanTxHeaderType ' ' TxHeaderName ';'];
-    msgTxHeaderFullcCodeGlobalVar = [msgTxHeaderFullcCodeGlobalVar, ...
-                                     msgTxHeadercCodeGlobalVar, ...
+    % Ccode
+    msgTxHeaderCcodeGlobalVar = [CanTxHeaderType ' ' TxHeaderName ';'];
+    msgTxHeaderFullCcodeGlobalVar = [msgTxHeaderFullCcodeGlobalVar, ...
+                                     msgTxHeaderCcodeGlobalVar, ...
                                      newline];
     
-    % hCode
-    msgTxHeaderhCodeGlobalVar = ['extern ' msgTxHeadercCodeGlobalVar];
-    msgTxHeaderFullhCodeGlobalVar = [msgTxHeaderFullhCodeGlobalVar, ...
-                                     msgTxHeaderhCodeGlobalVar, ...
+    % Hcode
+    msgTxHeaderHcodeGlobalVar = ['extern ' msgTxHeaderCcodeGlobalVar];
+    msgTxHeaderFullHcodeGlobalVar = [msgTxHeaderFullHcodeGlobalVar, ...
+                                     msgTxHeaderHcodeGlobalVar, ...
                                      newline];
   end
   
-  CanStackCcode = strrep(CanStackCcode, '<TxMsgGlobalVariablesDefine>', msgTxHeaderFullcCodeGlobalVar);
-  CanStackHcode = strrep(CanStackHcode, '<TxMsgGlobalVariablesDefine>', msgTxHeaderFullhCodeGlobalVar);
+  CanStackCcode = strrep(CanStackCcode, '<TxMsgGlobalVariablesDefine>', msgTxHeaderFullCcodeGlobalVar);
+  CanStackHcode = strrep(CanStackHcode, '<TxMsgGlobalVariablesDefine>', msgTxHeaderFullHcodeGlobalVar);
 
   %% TxMsgInitCall
 
@@ -64,7 +61,7 @@ function CanStackFileGen(MessageInfo)
     TxHeaderName = [msgName '_TxHeader'];
     TxHeaderInitFuncName = [TxHeaderName 'Init'];
   
-    % cCode Can Stack Init
+    % Ccode Can Stack Init
     TxHeaderInitFuncNameLine = [TabText TxHeaderInitFuncName '();'];
     TxHeaderInitFuncNameFullLine = [TxHeaderInitFuncNameFullLine, ...
                                     TxHeaderInitFuncNameLine, ...
@@ -75,8 +72,8 @@ function CanStackFileGen(MessageInfo)
   
   %% TxHeader InitFunc Code
 
-  msgTxHeaderFullcCodeInit = '';
-  msgTxHeaderFullhCodeInit = '';
+  msgTxHeaderFullCcodeInit = '';
+  msgTxHeaderFullHcodeInit = '';
   
   for i = 1:length(MessageInfo)
     Name = MessageInfo(i).Name;
@@ -94,29 +91,29 @@ function CanStackFileGen(MessageInfo)
     TxHeaderCcode = strrep(TxHeaderCcode, '<TxMsgExtID>', ExtId);
     TxHeaderCcode = strrep(TxHeaderCcode, '<TxMsgDLC>', DLC);
   
-    msgTxHeaderFullcCodeInit = [msgTxHeaderFullcCodeInit, ...
+    msgTxHeaderFullCcodeInit = [msgTxHeaderFullCcodeInit, ...
                                 TxHeaderCcode, ...
                                 newline, newline];
   
     TxHeaderHcode = TxHeaderhCgt;
     TxHeaderHcode = strrep(TxHeaderHcode, '<TxMsgName>', Name);
   
-    msgTxHeaderFullhCodeInit = [msgTxHeaderFullhCodeInit, ...
+    msgTxHeaderFullHcodeInit = [msgTxHeaderFullHcodeInit, ...
                                 TxHeaderHcode, ...
                                 newline];
   end
   
-  CanStackCcode = strrep(CanStackCcode, '<TxMsgInitDefine>', msgTxHeaderFullcCodeInit);
-  CanStackHcode = strrep(CanStackHcode, '<TxMsgInitDefine>', msgTxHeaderFullhCodeInit);
+  CanStackCcode = strrep(CanStackCcode, '<TxMsgInitDefine>', msgTxHeaderFullCcodeInit);
+  CanStackHcode = strrep(CanStackHcode, '<TxMsgInitDefine>', msgTxHeaderFullHcodeInit);
   
   %% File Generate
 
-  % cCode
+  % Ccode
   fidC = fopen(cFilePath, 'w');
   fprintf(fidC, CanStackCcode);
   fclose(fidC);
   
-  % hCode
+  % Hcode
   fidH = fopen(hFilePath, 'w');
   fprintf(fidH, CanStackHcode);
   fclose(fidH);

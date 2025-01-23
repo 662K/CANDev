@@ -1,11 +1,11 @@
 /* Includes ------------------------------------------------------------------*/
 #include "CanStack.h"
 
-/* Tx message Global variables -----------------------------------------------*/
+/* Global variables -----------------------------------------------*/
 CAN_TxHeaderTypeDef msg_MCU_200h_TxHeader;
 CAN_TxHeaderTypeDef msg_MCU_201h_TxHeader;
 
-/* CAN Stack initialization function ----------------------------------------*/
+/* function ------------------------------------------------------------------*/
 /**
   * @brief  The initialization function for the Can Stack
   * @retval None
@@ -17,7 +17,6 @@ void CanStackInit(void){
   msgOutPack_initialize();
 }
 
-/* Tx message initialization function ----------------------------------------*/
 /**
   * @brief  The initialization function for the MCU_200h Tx message
   * @retval None

@@ -1,9 +1,9 @@
 /* Includes ------------------------------------------------------------------*/
 #include "CanStack.h"
 
-/* Tx message Global variables -----------------------------------------------*/
+/* Global variables -----------------------------------------------*/
 <TxMsgGlobalVariablesDefine>
-/* CAN Stack initialization function ----------------------------------------*/
+/* function ------------------------------------------------------------------*/
 /**
   * @brief  The initialization function for the Can Stack
   * @retval None
@@ -13,5 +13,4 @@ void CanStackInit(void){
   msgOutPack_initialize();
 }
 
-/* Tx message initialization function ----------------------------------------*/
 <TxMsgInitDefine>
