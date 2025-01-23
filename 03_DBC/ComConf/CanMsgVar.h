@@ -1,10 +1,8 @@
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef _CANMSGVAR_H
 #define _CANMSGVAR_H
-
 /* Includes ------------------------------------------------------------------*/
 #include <stdint.h>
-
 /* Struct Define -------------------------------------------------------------*/
 typedef struct {
   uint8_t  MCU_CtrlMode;

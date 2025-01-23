@@ -1,4 +1,4 @@
-function CanMsgTypeDefFileGen(MessageInfo, CgtFolderName, CanCodeFolderName)
+function CanMsgVarFileGen(MessageInfo, CgtFolderName, CanCodeFolderName)
   
   TabText = '  ';
 
@@ -10,19 +10,21 @@ function CanMsgTypeDefFileGen(MessageInfo, CgtFolderName, CanCodeFolderName)
   hFilePath = fullfile(CanCodeFolderName, CanMsgVarHcodeFileName);
   
   % CanMsgVarCgt
-  CanMsgVarcCgtFileName = 'CanMsgVarCgt.c';
-  CanMsgVarhCgtFileName = 'CanMsgVarCgt.h';
-  CanMsgVarcCgtFilePath = fullfile(CgtFolderName, CanMsgVarcCgtFileName);
-  CanMsgVarhCgtFilePath = fullfile(CgtFolderName, CanMsgVarhCgtFileName);
+  CanMsgVarJsonFileName = 'CanMsgVar.json';
+  CanMsgVarJsonFilePath = fullfile(CgtFolderName, CanMsgVarJsonFileName);
+  CanMsgVarInfo = readstruct(CanMsgVarJsonFilePath);
+  CanMsgVarCcode = char(strjoin(CanMsgVarInfo.Cgt.CcodeCgt, newline));
+  CanMsgVarHcode = char(strjoin(CanMsgVarInfo.Cgt.HcodeCgt, newline));
+  
+  % StructCgt
+  StructDefCgt = char(strjoin(CanMsgVarInfo.Cgt.StructDefCgt, newline));
+  msgStructNameCgt = char(CanMsgVarInfo.Cgt.msgStructNameCgt);
+  msgNameCgt = char(CanMsgVarInfo.Cgt.msgNameCgt);
 
-  CanMsgVarCcode = fileread(CanMsgVarcCgtFilePath);
-  CanMsgVarHcode = fileread(CanMsgVarhCgtFilePath);
-  
-  % StructDefCgt
-  StructDefhCgtFileName = 'StructDefCgt.h';
-  StructDefhCgtFilePath = fullfile(CgtFolderName, StructDefhCgtFileName);
-  
-  StructDefCgt = fileread(StructDefhCgtFilePath);
+  % Key
+  MsgNameKey = char(strjoin(CanMsgVarInfo.Key.MsgName, newline));
+  StructSigDefKey = char(CanMsgVarInfo.Key.StructSigDef);
+  StructMsgDefKey = char(CanMsgVarInfo.Key.StructMsgDef);
   
   %% CanMsgStructDef
   dbcType = {'uint8', 'uint16', 'uint32', 'int8', 'int16', 'int32', 'float'};
@@ -41,7 +43,7 @@ function CanMsgTypeDefFileGen(MessageInfo, CgtFolderName, CanCodeFolderName)
     
     % 读取当前 Msg 名称
     MsgName = MessageInfo(i).Name;
-    msgTypeDefName = ['msg_' MsgName '_TypeDef'];
+    msgTypeDefName = strrep(msgStructNameCgt, MsgNameKey, MsgName);
     
     % 读取当前 Msg 内部 Signal 信息
     MsgSigInfo = MessageInfo(i).SignalInfo;
@@ -71,16 +73,16 @@ function CanMsgTypeDefFileGen(MessageInfo, CgtFolderName, CanCodeFolderName)
     MsgSigDef = MsgSigDef(1:end-1);
 
     % 替换 Struct 模板中 Signal 信息
-    CanMsgStructDef = strrep(CanMsgStructDef, '<MsgSigDefine>', MsgSigDef);
+    CanMsgStructDef = strrep(CanMsgStructDef, StructSigDefKey, MsgSigDef);
 
     % 替换 Struct 模板中 Msg 信息
-    CanMsgStructDef = strrep(CanMsgStructDef, '<MsgPackDefine>', msgTypeDefName);
+    CanMsgStructDef = strrep(CanMsgStructDef, StructMsgDefKey, msgTypeDefName);
     
     % 汇总 Struct 模板
     CanMsgStructDefHcode = [CanMsgStructDefHcode CanMsgStructDef newline newline];
 
     % -----------------------< Variant Define >------------------------------ %
-    MsgStructVarName = ['msg_' MsgName];
+    MsgStructVarName = strrep(msgNameCgt, MsgNameKey, MsgName);
     MsgStructVarDef = [msgTypeDefName ' ' MsgStructVarName ';'];
 
     MsgStructVarDefCcode = [MsgStructVarDefCcode MsgStructVarDef newline];
